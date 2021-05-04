@@ -53,7 +53,6 @@ namespace VDS.RDF
         protected readonly IGraph _g;
         private TripleEventHandler TripleAssertedHandler, TripleRetractedHandler;
         private GraphEventHandler GraphChangedHandler, GraphClearedHandler, GraphMergedHandler;
-        private CancellableGraphEventHandler GraphClearRequestedHandler, GraphMergeRequestedHandler;
 
         /// <summary>
         /// Creates a wrapper around the default Graph implementation, primarily required only for deserialization and requires that the caller call <see cref="WrapperGraph.AttachEventHandlers"/> to properly wire up event handling.
@@ -68,8 +67,6 @@ namespace VDS.RDF
             GraphChangedHandler = new GraphEventHandler(OnChanged);
             GraphClearedHandler = new GraphEventHandler(OnCleared);
             GraphMergedHandler = new GraphEventHandler(OnMerged);
-            GraphClearRequestedHandler = new CancellableGraphEventHandler(OnClearRequested);
-            GraphMergeRequestedHandler = new CancellableGraphEventHandler(OnMergeRequested);
         }
 
         /// <summary>
