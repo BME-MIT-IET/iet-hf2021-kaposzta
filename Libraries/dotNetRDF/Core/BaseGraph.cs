@@ -221,16 +221,8 @@ namespace VDS.RDF
         /// <returns></returns>
         public virtual IBlankNode CreateBlankNode(String nodeId)
         {
-            // try
-            // {
-            //    Monitor.Enter(this._bnodemapper);
-                _bnodemapper.CheckID(ref nodeId);
-                return new BlankNode(this, nodeId);
-            // }
-            // finally
-            // {
-            //    Monitor.Exit(this._bnodemapper);
-            // }
+            _bnodemapper.CheckID(ref nodeId);
+            return new BlankNode(this, nodeId);
         }
 
         /// <summary>
@@ -521,55 +513,13 @@ namespace VDS.RDF
                 // Prepare a mapping of Blank Nodes to Blank Nodes
                 Dictionary<INode, IBlankNode> mapping = new Dictionary<INode, IBlankNode>();
 
+                var tripleCreator = new AssertTripleCreator();
+
                 foreach (Triple t in g.Triples)
                 {
-                    INode s, p, o;
-                    if (t.Subject.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Subject))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Subject.GraphUri;
-                            mapping.Add(t.Subject, temp);
-                        }
-                        s = mapping[t.Subject];
-                    }
-                    else
-                    {
-                        s = Tools.CopyNode(t.Subject, this, keepOriginalGraphUri);
-                    }
+                    var triple = tripleCreator.CreateTriplesForAssert(t, g, keepOriginalGraphUri, mapping, this);
 
-                    if (t.Predicate.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Predicate))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Predicate.GraphUri;
-                            mapping.Add(t.Predicate, temp);
-                        }
-                        p = mapping[t.Predicate];
-                    }
-                    else
-                    {
-                        p = Tools.CopyNode(t.Predicate, this, keepOriginalGraphUri);
-                    }
-
-                    if (t.Object.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Object))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Object.GraphUri;
-                            mapping.Add(t.Object, temp);
-                        }
-                        o = mapping[t.Object];
-                    }
-                    else
-                    {
-                        o = Tools.CopyNode(t.Object, this, keepOriginalGraphUri);
-                    }
-
-                    Assert(new Triple(s, p, o, t.Context));
+                    Assert(new Triple(triple.Subject, triple.Predicate, triple.Object, t.Context));
                 }
             }
 
