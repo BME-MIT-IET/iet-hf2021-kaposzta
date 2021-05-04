@@ -49,7 +49,7 @@ namespace VDS.RDF
         /// <summary>
         /// Node Type for the Node.
         /// </summary>
-        protected NodeType _nodetype = NodeType.Literal;
+        protected NodeType _nodetype;
         /// <summary>
         /// Stores the computed Hash Code for this Node.
         /// </summary>
