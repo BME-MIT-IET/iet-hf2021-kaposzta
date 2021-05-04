@@ -69,7 +69,7 @@ namespace VDS.RDF
         protected internal BaseBlankNode(IGraph g, String nodeId)
             : base(g, NodeType.Blank)
         {
-            if (nodeId.Equals(String.Empty)) throw new RdfException("Cannot create a Blank Node with an empty ID");
+            if (String.IsNullOrEmpty(nodeId)) throw new RdfException("Cannot create a Blank Node with an empty ID");
             _id = nodeId;
 
             // Compute Hash Code
