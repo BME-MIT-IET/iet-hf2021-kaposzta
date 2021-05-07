@@ -73,11 +73,9 @@ namespace NemFunkcionálisTesztelés
         public void readWriteTest()
         {
 
-            Stopwatch s = Stopwatch.StartNew();
-
             NTriplesWriter ntwriter = new NTriplesWriter();
 
-            s.Restart();
+            Stopwatch s = Stopwatch.StartNew();
             ntwriter.Save(graph, "fileNT.nt");
             saveTimeNTMilli = s.ElapsedMilliseconds;
             
@@ -125,133 +123,17 @@ namespace NemFunkcionálisTesztelés
         /// </summary>
         public void QuerryTest()
         {
-            Stopwatch s = Stopwatch.StartNew();
-
             TripleStore store = new TripleStore();
             store.Add(graph);
             SparqlQueryParser sparqlparser = new SparqlQueryParser();
+            Stopwatch s = Stopwatch.StartNew();
             SparqlQuery query = sparqlparser.ParseFromString("CONSTRUCT { ?s ?p ?o } WHERE { { ?s ?p ?o } UNION { GRAPH ?g { ?s ?p ?o } } }");
             Object results = store.ExecuteQuery(query);
             if (results is IGraph)
             {
-                //Print out the Results
                 IGraph g5 = (IGraph)results;
-                /*foreach (Triple t in g5.Triples)
-                {
-                    Console.WriteLine(t.ToString());
-                }*/
-                //Console.WriteLine("Query took " + query.QueryExecutionTime.ToString());
             }
-            //Console.WriteLine(query.QueryExecutionTime.Value.TotalMilliseconds);
             querryTimeMilli = s.ElapsedMilliseconds;
-        }
-
-
-        public static void badTest()
-        {
-            IGraph g = new Graph();
-
-            IUriNode dotNetRDF = g.CreateUriNode(UriFactory.Create("http://www.dotnetrdf.org"));
-            IUriNode says = g.CreateUriNode(UriFactory.Create("http://example.org/says"));
-            ILiteralNode helloWorld = g.CreateLiteralNode("Hello World");
-            ILiteralNode bonjourMonde = g.CreateLiteralNode("Bonjour tout le Monde", "fr");
-
-            for (int i = 0; i < 100000; i++)
-            {
-                g.Assert(new Triple(dotNetRDF, says, helloWorld));
-                g.Assert(new Triple(dotNetRDF, says, bonjourMonde));
-            }
-
-
-            foreach (Triple t in g.Triples)
-            {
-                Console.WriteLine(t.ToString());
-            }
-
-            IGraph g2 = new Graph();
-            IGraph g3 = new Graph();
-            try
-            {
-                NTriplesWriter ntwriter = new NTriplesWriter();
-                ntwriter.Save(g, "HelloWorld.nt");
-
-                RdfXmlWriter rdfxmlwriter = new RdfXmlWriter();
-                rdfxmlwriter.Save(g, "somefile.rdf");
-
-
-                FileLoader.Load(g2, "somefile.rdf");
-
-
-                NTriplesParser ntparser = new NTriplesParser();
-
-                //Load using Filename
-                ntparser.Load(g3, "HelloWorld.nt");
-            }
-            catch (RdfParseException parseEx)
-            {
-                //This indicates a parser error e.g unexpected character, premature end of input, invalid syntax etc.
-                Console.WriteLine("Parser Error");
-                Console.WriteLine(parseEx.Message);
-            }
-            catch (RdfException rdfEx)
-            {
-                //This represents a RDF error e.g. illegal triple for the given syntax, undefined namespace
-                Console.WriteLine("RDF Error");
-                Console.WriteLine(rdfEx.Message);
-            }
-
-            TripleStore store = new TripleStore();
-            store.LoadFromFile("somefile.rdf");
-            Object results = store.ExecuteQuery("SELECT * WHERE { { ?s ?p ?o } UNION { GRAPH ?g { ?s ?p ?o } } }");
-            if (results is SparqlResultSet)
-            {
-                //Print out the Results
-                SparqlResultSet rset = (SparqlResultSet)results;
-                foreach (SparqlResult result in rset)
-                {
-                    Console.WriteLine(result.ToString());
-                }
-            }
-
-
-            SparqlQueryParser sparqlparser = new SparqlQueryParser();
-            SparqlQuery query = sparqlparser.ParseFromString("CONSTRUCT { ?s ?p ?o } WHERE { { ?s ?p ?o } UNION { GRAPH ?g { ?s ?p ?o } } }");
-            results = store.ExecuteQuery(query);
-            if (results is IGraph)
-            {
-                //Print out the Results
-                IGraph g5 = (IGraph)results;
-                foreach (Triple t in g5.Triples)
-                {
-                    Console.WriteLine(t.ToString());
-                }
-                Console.WriteLine("Query took " + query.QueryExecutionTime.ToString());
-            }
-
-
-
-            /*
-            InMemoryDataset ds = new InMemoryDataset(store, new Uri("http://mydefaultgraph.org"));
-
-            //Get the Query processor
-            ISparqlQueryProcessor processor = new LeviathanQueryProcessor(ds);
-
-            //Use the SparqlQueryParser to give us a SparqlQuery object
-            //Should get a Graph back from a CONSTRUCT query
-            SparqlQueryParser sparqlparser = new SparqlQueryParser();
-            SparqlQuery query = sparqlparser.ParseFromString("CONSTRUCT { ?s ?p ?o } WHERE {?s ?p ?o}");
-            results = processor.ProcessQuery(query);
-            if (results is IGraph)
-            {
-                //Print out the Results
-                IGraph g66 = (IGraph)results;
-                NTriplesFormatter formatter = new NTriplesFormatter();
-                foreach (Triple t in g66.Triples)
-                {
-                    Console.WriteLine(t.ToString(formatter));
-                }
-                Console.WriteLine("Query took " + query.QueryExecutionTime + " milliseconds");
-            }*/
         }
     }
 }
