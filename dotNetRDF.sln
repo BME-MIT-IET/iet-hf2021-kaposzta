@@ -31,7 +31,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SparqlAnalyzer", "Testing\SparqlAnalyzer\SparqlAnalyzer.csproj", "{B19AD698-11F5-486E-B534-00262F751700}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NemFunkcionálisTesztelés", "NemFunkcionálisTesztelés\NemFunkcionálisTesztelés.csproj", "{347401E7-0A2A-4111-A50D-1A4CD51FD05C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NemFunkcionalisTeszteles", "NemFunkcionálisTesztelés\NemFunkcionalisTeszteles.csproj", "{347401E7-0A2A-4111-A50D-1A4CD51FD05C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Non-funcional_test", "Non-funcional_test", "{F982242F-BB9C-4F78-AC58-69FC09E645EC}"
 EndProject
