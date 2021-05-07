@@ -56,20 +56,6 @@ namespace VDS.RDF.Shacl
             Validates(name);
         }
 
-        [Theory]
-        [MemberData(nameof(SparqlTests), MemberType = typeof(TestSuiteData))]
-        public void SparqlPartialCompliance(string name)
-        {
-            Conforms(name);
-        }
-
-        [Theory]
-        [MemberData(nameof(SparqlTests), MemberType = typeof(TestSuiteData))]
-        public void SparqlFullCompliance(string name)
-        {
-            Validates(name);
-        }
-
         private static void Conforms(string name)
         {
             ExtractTestData(name, out var testGraph, out var failure, out var dataGraph, out var shapesGraph);
