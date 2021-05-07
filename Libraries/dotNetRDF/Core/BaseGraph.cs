@@ -57,6 +57,10 @@ namespace VDS.RDF
         /// </summary>
         protected Uri _baseuri = null;
         /// <summary>
+        /// Auto implemented property for _baseuri
+        /// </summary>
+        public Uri Base_Uri{get;set;}
+        /// <summary>
         /// Blank Node ID Mapper.
         /// </summary>
         protected BlankNodeMapper _bnodemapper;
@@ -145,10 +149,11 @@ namespace VDS.RDF
         /// This value may be changed during Graph population depending on whether the Concrete syntax allows the Base Uri to be changed and how the Parser handles this.
         /// </remarks>
        
+       
         public Uri BaseUri
         {
-            get { return _baseuri; }
-            set { _baseuri = value; }
+            get {return _baseuri;} 
+            set {_baseuri = value;}
         }
         
 
@@ -992,7 +997,7 @@ namespace VDS.RDF
                         }
                         catch
                         {
-                           Console.WriteLine("Error occured during deserialization");
+                          throw new Exception("Error occured during deserialization");
                         }
                     }
                 }
