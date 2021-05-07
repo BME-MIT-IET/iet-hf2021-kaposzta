@@ -56,10 +56,13 @@ namespace VDS.RDF
         /// Base Uri of the Graph.
         /// </summary>
         protected Uri _baseuri = null;
-        /// <summary>
-        /// Auto implemented property for _baseuri
+       /// <summary>
+        /// Gets the current Base Uri for the Graph.
         /// </summary>
-        public Uri Base_Uri{get;set;}
+        /// <remarks>
+        /// This value may be changed during Graph population depending on whether the Concrete syntax allows the Base Uri to be changed and how the Parser handles this.
+        /// </remarks>      
+          public Uri BaseUri{get;set;}
         /// <summary>
         /// Blank Node ID Mapper.
         /// </summary>
@@ -141,21 +144,6 @@ namespace VDS.RDF
         /// </summary>
         /// <returns></returns>
         public virtual INamespaceMapper NamespaceMap => _nsmapper;
-
-        /// <summary>
-        /// Gets the current Base Uri for the Graph.
-        /// </summary>
-        /// <remarks>
-        /// This value may be changed during Graph population depending on whether the Concrete syntax allows the Base Uri to be changed and how the Parser handles this.
-        /// </remarks>
-       
-       
-        public Uri BaseUri
-        {
-            get {return _baseuri;} 
-            set {_baseuri = value;}
-        }
-        
 
         /// <summary>
         /// Gets whether a Graph is Empty ie. Contains No Triples or Nodes.
