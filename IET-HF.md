@@ -1,6 +1,6 @@
 # dotNetRDF
 
-A projekt egy API biztosít RDF adatokkal való dolgozáshoz .NET környezetben. Az adatok tárolásához három osztályt ad a projekt: `Triples`, `Graphs` and `Triple Stores`, viszont nincs közvetlen támogatása OWL-hez. A tárolás mellett biztosít adat lekérdezést SPARQL segítségével.
+A projekt egy API biztosít RDF adatok tárolására és lekérdezésére .NET környezetben. Az adatok tárolásához három osztályt ad a projekt: `Triples`, `Graphs` and `Triple Stores`, viszont nincs közvetlen támogatása OWL-hez. A tárolás mellett biztosít adat lekérdezést SPARQL segítségével.
 
 ## Triples
 
