@@ -212,40 +212,5 @@ namespace dotNetRDF.MockServerTests
             resultsHandler.Verify(x => x.HandleResult(It.IsAny<SparqlResult>()), Times.Exactly(1));
             resultsHandler.Verify(x => x.EndResults(true), Times.Exactly(1));
         }
-
-        [Fact]
-        public void SparqlRemoteEndpointAsyncApiQueryWithResultSet()
-        {
-            RegisterSelectQueryGetHandler();
-            SparqlRemoteEndpoint endpoint = GetQueryEndpoint();
-            ManualResetEvent signal = new ManualResetEvent(false);
-            endpoint.QueryWithResultSet("SELECT * WHERE {?s ?p ?o}", (r, s) =>
-            {
-                signal.Set();
-                signal.Close();
-            }, null);
-
-            signal.WaitOne(10000);
-            signal.SafeWaitHandle.IsClosed.Should().BeTrue();
-        }
-
-
-        [Fact]
-        public void SparqlRemoteEndpointAsyncApiQueryWithResultGraph()
-        {
-            RegisterConstructQueryGetHandler();
-            SparqlRemoteEndpoint endpoint = GetQueryEndpoint();
-            ManualResetEvent signal = new ManualResetEvent(false);
-            endpoint.QueryWithResultGraph("CONSTRUCT WHERE { ?s ?p ?o }", (r, s) =>
-            {
-                signal.Set();
-                signal.Close();
-            }, null);
-
-            signal.WaitOne(10000);
-            signal.SafeWaitHandle.IsClosed.Should().BeTrue();
-        }
-
-
     }
 }

@@ -64,14 +64,6 @@ namespace VDS.RDF.JsonLd
         }
 
         [Theory]
-        [MemberData(nameof(JsonLdTestSuiteDataSource.W3CFromRdfTests), MemberType = typeof(JsonLdTestSuiteDataSource))]
-        public override void JsonLdWriterTests(string testId, JsonLdTestType testType, string inputPath, string contextPath,
-            string expectedOutputPath, JsonLdErrorCode expectErrorCode, bool useNativeTypes, bool useRdfType, bool ordered, string rdfDirection)
-        {
-            base.JsonLdWriterTests(testId, testType, inputPath, contextPath, expectedOutputPath, expectErrorCode, useNativeTypes, useRdfType, ordered, rdfDirection);
-        }
-
-        [Theory]
         [MemberData(nameof(JsonLdTestSuiteDataSource.W3CFrameTests), MemberType = typeof(JsonLdTestSuiteDataSource))]
         public override void JsonLdFramingTests(string testId, JsonLdTestType testType, string inputPath, string framePath,
             string expectedOutputPath, JsonLdErrorCode expectErrorCode, string processingMode, 

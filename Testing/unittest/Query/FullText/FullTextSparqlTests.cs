@@ -135,32 +135,6 @@ namespace VDS.RDF.Query.FullText
         }
 
         [Fact]
-        public void FullTextSparqlSearchLuceneObjects1()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LuceneObjectsIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT * WHERE { ?s pf:textMatch 'http' }", expected);
-        }
-
-        [Fact]
-        public void FullTextSparqlSearchLuceneObjects2()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LuceneObjectsIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT ?score ?match WHERE { (?match ?score) pf:textMatch 'http' } ORDER BY DESC(?score)", expected);
-        }
-
-        [Fact]
         public void FullTextSparqlSearchLuceneObjects3()
         {
             this.EnsureTestData();
@@ -200,32 +174,6 @@ namespace VDS.RDF.Query.FullText
         }
 
         [Fact]
-        public void FullTextSparqlSearchLuceneSubjects1()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LuceneSubjectsIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT * WHERE { ?s pf:textMatch 'http' }", expected);
-        }
-
-        [Fact]
-        public void FullTextSparqlSearchLuceneSubjects2()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LuceneSubjectsIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT ?score ?match WHERE { (?match ?score) pf:textMatch 'http' } ORDER BY DESC(?score)", expected);
-        }
-
-        [Fact]
         public void FullTextSparqlSearchLuceneSubjects3()
         {
             this.EnsureTestData();
@@ -262,32 +210,6 @@ namespace VDS.RDF.Query.FullText
                             select t).Count();
 
             this.RunTest(new LuceneSubjectsIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT ?score ?match WHERE { (?match ?score) pf:textMatch ('http' 3) } ORDER BY DESC(?score)", Math.Min(expected, 3), false);
-        }
-
-        [Fact]
-        public void FullTextSparqlSearchLucenePredicates1()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LucenePredicatesIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT * WHERE { ?s pf:textMatch 'http' }", expected);
-        }
-
-        [Fact]
-        public void FullTextSparqlSearchLucenePredicates2()
-        {
-            this.EnsureTestData();
-
-            int expected = (from t in this._dataset.Triples
-                            where t.Object.NodeType == NodeType.Literal
-                                  && ((ILiteralNode)t.Object).Value.ToLower().Contains("http")
-                            select t).Count();
-
-            this.RunTest(new LucenePredicatesIndexer(LuceneTestHarness.Index, LuceneTestHarness.Analyzer, LuceneTestHarness.Schema), "SELECT ?score ?match WHERE { (?match ?score) pf:textMatch 'http' } ORDER BY DESC(?score)", expected);
         }
 
         [Fact]

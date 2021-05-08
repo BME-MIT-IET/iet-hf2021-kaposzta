@@ -49,22 +49,5 @@ namespace dotNetRDF.MockServerTests
             logEntries.Should().HaveCount(1);
             logEntries[0].RequestMessage.Method.Should().BeEquivalentTo("post");
         }
-
-        [Fact]
-        public void SparqlRemoteEndpointAsyncApiUpdate()
-        {
-
-            SparqlRemoteUpdateEndpoint endpoint = GetUpdateEndpoint();
-            ManualResetEvent signal = new ManualResetEvent(false);
-            endpoint.Update("LOAD <http://dbpedia.org/resource/Ilkeston> INTO GRAPH <http://example.org/async/graph>", s =>
-            {
-                signal.Set();
-                signal.Close();
-            }, null);
-
-            signal.WaitOne(TimeSpan.FromSeconds(10.0));
-            Assert.True(signal.SafeWaitHandle.IsClosed, "Wait Handle should be closed");
-        }
-
     }
 }
