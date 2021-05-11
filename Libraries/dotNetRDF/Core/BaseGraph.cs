@@ -512,7 +512,7 @@ namespace VDS.RDF
 
                 foreach (Triple t in g.Triples)
                 {
-                    var triple = tripleCreator.CreateTriplesForAssert(t, g, keepOriginalGraphUri, mapping, this);
+                    var triple = tripleCreator.CreateTriplesForAssert(t, keepOriginalGraphUri, mapping, this);
 
                     Assert(new Triple(triple.Subject, triple.Predicate, triple.Object, t.Context));
                 }

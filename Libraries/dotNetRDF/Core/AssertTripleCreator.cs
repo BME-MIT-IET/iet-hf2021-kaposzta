@@ -36,7 +36,6 @@ namespace VDS.RDF
     //create triples for assert
     public class AssertTripleCreator
     {
-
         public Triple CreateTriplesForAssert(Triple t, bool keepOriginalGraphUri, Dictionary<INode, IBlankNode> mapping, IGraph _g)
         {
             INode s, p, o;
