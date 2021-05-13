@@ -389,7 +389,7 @@ namespace VDS.RDF
                                     {
                                         return 1;
                                     }
-                                    goto default;
+                                      return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                 }
 
                             case XmlSpecsHelper.XmlSchemaDataTypeByte:
@@ -413,7 +413,7 @@ namespace VDS.RDF
                                     {
                                         return 1;
                                     }
-                                    goto default;
+                                      return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                 }
 
                             case XmlSpecsHelper.XmlSchemaDataTypeUnsignedByte:
@@ -439,7 +439,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -468,7 +468,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -484,7 +484,7 @@ namespace VDS.RDF
                                         {
                                             if (bNegInt >= 0)
                                             {
-                                                goto default;
+                                                  return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                             }
                                             else
                                             {
@@ -502,7 +502,7 @@ namespace VDS.RDF
                                     }
                                     else if (aNegInt >= 0)
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                     else
                                     {
@@ -515,7 +515,7 @@ namespace VDS.RDF
                                     {
                                         if (bNegInt >= 0)
                                         {
-                                            goto default;
+                                              return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                         }
                                         else
                                         {
@@ -524,7 +524,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -557,7 +557,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -583,7 +583,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -609,7 +609,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -635,7 +635,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -661,7 +661,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -709,7 +709,7 @@ namespace VDS.RDF
                                     }
                                     catch
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -743,7 +743,7 @@ namespace VDS.RDF
                                     }
                                     catch
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -770,7 +770,7 @@ namespace VDS.RDF
                                     }
                                     else
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 
@@ -800,7 +800,7 @@ namespace VDS.RDF
                                     }
                                     catch
                                     {
-                                        goto default;
+                                          return culture.CompareInfo.Compare(a.Value, b.Value, comparisonOptions);;
                                     }
                                 }
 

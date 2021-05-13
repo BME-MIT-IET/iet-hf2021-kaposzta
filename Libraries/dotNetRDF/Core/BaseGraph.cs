@@ -56,6 +56,13 @@ namespace VDS.RDF
         /// Base Uri of the Graph.
         /// </summary>
         protected Uri _baseuri = null;
+       /// <summary>
+        /// Gets the current Base Uri for the Graph.
+        /// </summary>
+        /// <remarks>
+        /// This value may be changed during Graph population depending on whether the Concrete syntax allows the Base Uri to be changed and how the Parser handles this.
+        /// </remarks>      
+          public Uri BaseUri{get;set;}
         /// <summary>
         /// Blank Node ID Mapper.
         /// </summary>
@@ -139,18 +146,6 @@ namespace VDS.RDF
         public virtual INamespaceMapper NamespaceMap => _nsmapper;
 
         /// <summary>
-        /// Gets the current Base Uri for the Graph.
-        /// </summary>
-        /// <remarks>
-        /// This value may be changed during Graph population depending on whether the Concrete syntax allows the Base Uri to be changed and how the Parser handles this.
-        /// </remarks>
-        public virtual Uri BaseUri
-        {
-            get => _baseuri;
-            set => _baseuri = value;
-        }
-
-        /// <summary>
         /// Gets whether a Graph is Empty ie. Contains No Triples or Nodes.
         /// </summary>
         public virtual bool IsEmpty => (_triples.Count == 0);
@@ -221,16 +216,8 @@ namespace VDS.RDF
         /// <returns></returns>
         public virtual IBlankNode CreateBlankNode(String nodeId)
         {
-            // try
-            // {
-            //    Monitor.Enter(this._bnodemapper);
-                _bnodemapper.CheckID(ref nodeId);
-                return new BlankNode(this, nodeId);
-            // }
-            // finally
-            // {
-            //    Monitor.Exit(this._bnodemapper);
-            // }
+            _bnodemapper.CheckID(ref nodeId);
+            return new BlankNode(this, nodeId);
         }
 
         /// <summary>
@@ -521,55 +508,13 @@ namespace VDS.RDF
                 // Prepare a mapping of Blank Nodes to Blank Nodes
                 Dictionary<INode, IBlankNode> mapping = new Dictionary<INode, IBlankNode>();
 
+                var tripleCreator = new AssertTripleCreator();
+
                 foreach (Triple t in g.Triples)
                 {
-                    INode s, p, o;
-                    if (t.Subject.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Subject))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Subject.GraphUri;
-                            mapping.Add(t.Subject, temp);
-                        }
-                        s = mapping[t.Subject];
-                    }
-                    else
-                    {
-                        s = Tools.CopyNode(t.Subject, this, keepOriginalGraphUri);
-                    }
+                    var triple = tripleCreator.CreateTriplesForAssert(t, keepOriginalGraphUri, mapping, this);
 
-                    if (t.Predicate.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Predicate))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Predicate.GraphUri;
-                            mapping.Add(t.Predicate, temp);
-                        }
-                        p = mapping[t.Predicate];
-                    }
-                    else
-                    {
-                        p = Tools.CopyNode(t.Predicate, this, keepOriginalGraphUri);
-                    }
-
-                    if (t.Object.NodeType == NodeType.Blank)
-                    {
-                        if (!mapping.ContainsKey(t.Object))
-                        {
-                            IBlankNode temp = CreateBlankNode();
-                            if (keepOriginalGraphUri) temp.GraphUri = t.Object.GraphUri;
-                            mapping.Add(t.Object, temp);
-                        }
-                        o = mapping[t.Object];
-                    }
-                    else
-                    {
-                        o = Tools.CopyNode(t.Object, this, keepOriginalGraphUri);
-                    }
-
-                    Assert(new Triple(s, p, o, t.Context));
+                    Assert(new Triple(triple.Subject, triple.Predicate, triple.Object, t.Context));
                 }
             }
 
@@ -999,31 +944,28 @@ namespace VDS.RDF
         {
             XmlSerializer tripleDeserializer = new XmlSerializer(typeof(Triple));
             reader.Read();
-            if (reader.Name.Equals("namespaces"))
+            if (reader.Name.Equals("namespaces") && !reader.IsEmptyElement)
             {
-                if (!reader.IsEmptyElement)
+                reader.Read();
+                while (reader.Name.Equals("namespace"))
                 {
-                    reader.Read();
-                    while (reader.Name.Equals("namespace"))
+                    if (reader.MoveToAttribute("prefix"))
                     {
-                        if (reader.MoveToAttribute("prefix"))
+                        String prefix = reader.Value;
+                        if (reader.MoveToAttribute("uri"))
                         {
-                            String prefix = reader.Value;
-                            if (reader.MoveToAttribute("uri"))
-                            {
-                                Uri u = UriFactory.Create(reader.Value);
-                                NamespaceMap.AddNamespace(prefix, u);
-                                reader.Read();
-                            }
-                            else
-                            {
-                                throw new RdfParseException("Expected a uri attribute on a <namespace> element");
-                            }
+                            Uri u = UriFactory.Create(reader.Value);
+                            NamespaceMap.AddNamespace(prefix, u);
+                            reader.Read();
                         }
                         else
                         {
-                            throw new RdfParseException("Expected a prefix attribute on a <namespace> element");
+                            throw new RdfParseException("Expected a uri attribute on a <namespace> element");
                         }
+                    }
+                    else
+                    {
+                        throw new RdfParseException("Expected a prefix attribute on a <namespace> element");
                     }
                 }
             }
@@ -1043,7 +985,7 @@ namespace VDS.RDF
                         }
                         catch
                         {
-                            throw;
+                          throw new Exception("Error occured during deserialization");
                         }
                     }
                 }
@@ -1086,6 +1028,17 @@ namespace VDS.RDF
                 tripleSerializer.Serialize(writer, t);
             }
             writer.WriteEndElement();
+        }
+        /// <summary>
+        /// Must be overriden, since Equals() is overriden.
+        /// </summary>
+        /// <returns>hash</returns>
+        public override int GetHashCode()
+        {
+            var hashCode = 579852822;
+            hashCode = hashCode * -1521134295 + EqualityComparer<BaseTripleCollection>.Default.GetHashCode(_triples);
+            hashCode = hashCode * -1521134295 + EqualityComparer<GraphDeserializationInfo>.Default.GetHashCode(_dsInfo);
+            return hashCode;
         }
 
         #endregion

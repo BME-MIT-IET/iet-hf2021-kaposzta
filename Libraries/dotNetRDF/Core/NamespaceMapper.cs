@@ -622,14 +622,14 @@ namespace VDS.RDF
         /// <summary>
         /// Adds a QName Mapping to the Cache in a Thread Safe way.
         /// </summary>
-        /// <param name="key">Key.</param>
-        /// <param name="value">Value.</param>
-        protected override void AddToCache(string key, QNameMapping value)
+        /// <param name="uri">URI.</param>
+        /// <param name="mapping">Mapping.</param>
+        protected override void AddToCache(string uri, QNameMapping mapping)
         {
             try
             {
                 Monitor.Enter(_mapping);
-                base.AddToCache(key, value);
+                base.AddToCache(uri, mapping);
             }
             finally
             {

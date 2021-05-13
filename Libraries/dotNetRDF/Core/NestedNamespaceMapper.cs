@@ -68,7 +68,7 @@ namespace VDS.RDF
         /// <param name="uri">Namespace URI.</param>
         public void AddNamespace(string prefix, Uri uri)
         {
-            if (uri == null) throw new ArgumentNullException("Cannot set a prefix to the null URI");
+            if (uri == null) throw new ArgumentNullException( "uri","Cannot set a prefix to the null URI");
             NestedMapping mapping = new NestedMapping(prefix, uri, _level);
             if (!_prefixes.ContainsKey(uri.GetEnhancedHashCode())) _prefixes.Add(uri.GetEnhancedHashCode(), new List<NestedMapping>());
 

@@ -39,7 +39,7 @@ namespace VDS.RDF
         private Dictionary<String, String> _remappings = new Dictionary<string, string>();
         private static long _nextid = 0;
         private static long _nextremap = 0;
-        private String _prefix = "autos";
+        private readonly String _prefix = "autos";
 
         /// <summary>
         /// Creates a new Blank Node Mapper.

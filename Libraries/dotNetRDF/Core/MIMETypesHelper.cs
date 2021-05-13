@@ -277,7 +277,7 @@ namespace VDS.RDF
         /// <returns></returns>
         internal static bool IsValidMimeTypePart(String part)
         {
-            foreach (char c in part.ToCharArray())
+            foreach (char c in part)
             {
                 if (c <= 31) return false;
                 if (c == 127) return false;
