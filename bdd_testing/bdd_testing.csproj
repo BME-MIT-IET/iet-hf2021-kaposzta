@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0-release-20210429-01" />
+    <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.8.35" />
+
+    
+    <PackageReference Include="SpecRun.SpecFlow" Version="3.8.8" />
+    
+
+    
+
+    
+
+    
+
+    
+    <PackageReference Include="FluentAssertions" Version="6.0.0-alpha0002" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Drivers\" />
+    <Folder Include="Hooks\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\dotNetRDF.Data.DataTables\dotNetRDF.Data.DataTables.csproj" />
+    <ProjectReference Include="..\Libraries\dotNetRDF.Data.Virtuoso\dotNetRDF.Data.Virtuoso.csproj" />
+    <ProjectReference Include="..\Libraries\dotNetRDF.Query.FullText\dotNetRDF.Query.FullText.csproj" />
+    <ProjectReference Include="..\Libraries\dotNetRDF.Query.Spin\dotNetRDF.Query.Spin.csproj" />
+    <ProjectReference Include="..\Libraries\dotNetRDF.Web\dotNetRDF.Web.csproj" />
+    <ProjectReference Include="..\Libraries\dotNetRDF\dotNetRDF.csproj" />
+    <ProjectReference Include="..\Testing\dotNetRDF.MockServerTests\dotNetRDF.MockServerTests.csproj" />
+  </ItemGroup>
+
+</Project>
