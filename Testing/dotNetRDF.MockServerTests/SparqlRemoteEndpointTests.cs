@@ -130,23 +130,6 @@ namespace dotNetRDF.MockServerTests
             sparqlLogEntries.Should().HaveCount(1);
             sparqlLogEntries[0].RequestMessage.Method.Should().BeEquivalentTo("get");
         }
-        
-        [Fact]
-        public void ItDefaultsToPostForLongQueries()
-        {
-            RegisterSelectQueryPostHandler();
-
-            var input = new StringBuilder();
-            input.AppendLine("SELECT * WHERE {?s ?p ?o}");
-            input.AppendLine(new string('#', 2048));
-
-            var endpoint = GetQueryEndpoint();
-            var results = endpoint.QueryWithResultSet(input.ToString());
-            results.Should().HaveCount(1);
-            var sparqlLogEntries = _server.FindLogEntries(new RequestMessagePathMatcher(MatchBehaviour.AcceptOnMatch, "/sparql")).ToList();
-            sparqlLogEntries.Should().HaveCount(1);
-            sparqlLogEntries[0].RequestMessage.Method.Should().BeEquivalentTo("post");
-        }
 
         [Fact]
         public void ItAllowsLongQueriesToBeForcedToUseGet()
