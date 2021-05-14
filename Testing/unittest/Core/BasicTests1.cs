@@ -260,17 +260,6 @@ namespace VDS.RDF
         }
 
         [Fact]
-        public void UriResolutionWithGraphBase()
-        {
-            IGraph g = new Graph();
-            g.BaseUri = new Uri("http://example.org/");
-
-            Uri expected = new Uri("http://example.org/relative/path");
-            IUriNode actual = g.CreateUriNode(new Uri("relative/path", UriKind.Relative));
-            Assert.Equal(expected, actual.Uri);
-        }
-
-        [Fact]
         public void UriResolutionUriProvidedToQNameMethod()
         {
             IGraph g = new Graph();

@@ -35,32 +35,6 @@ namespace VDS.RDF.Parsing
 {
 	public class RdfXmlTests
 	{
-        [Fact]
-        public void ParsingRdfXmlAmpersands()
-        {
-            List<IRdfWriter> writers = new List<IRdfWriter>()
-            {
-                new RdfXmlWriter(),
-                new PrettyRdfXmlWriter()
-            };
-            IRdfReader parser = new RdfXmlParser();
-
-            Graph g = new Graph();
-            g.BaseUri = new Uri("http://example.org/ampersandsInRdfXml");
-            g.Assert(new Triple(g.CreateUriNode(), g.CreateUriNode(new Uri("http://example.org/property")), g.CreateUriNode(new Uri("http://example.org/a&b"))));
-            g.Assert(new Triple(g.CreateUriNode(), g.CreateUriNode(new Uri("http://example.org/property")), g.CreateLiteralNode("A & B")));
-
-            foreach (IRdfWriter writer in writers)
-            {
-                    Console.WriteLine(writer.GetType().ToString());
-                    String temp = StringWriter.Write(g, writer);
-                    Console.WriteLine(temp);
-                    Graph h = new Graph();
-                    StringParser.Parse(h, temp);
-                    Assert.Equal(g, h);
-                    Console.WriteLine();
-            }
-        }
 
         private void TestRdfXmlSequence(IRdfReader parser, String file)
         {
