@@ -1,4 +1,4 @@
-# H1 BDD testing:
+#  BDD testing:
 
 Az ajánlott frameworkök közül a SpecFlow-ot választva Gherkin nyelven, 4 Fő feature-ét teszteltem.
 
