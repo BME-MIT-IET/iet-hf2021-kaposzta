@@ -127,21 +127,5 @@ _:s2 <urn:p> ""o"" .
 
             Assert.Equal(expected, actual);
         }
-
-        [Fact]
-        public void Output_conforms_to_XSD()
-        {
-            var settings = new XmlReaderSettings
-            {
-                ValidationType = ValidationType.Schema, Schemas = {XmlResolver = new XmlUrlResolver()}
-            };
-            settings.Schemas.Add(GraphMLSpecsHelper.NS, GraphMLSpecsHelper.XsdUri);
-            using(var reader = XmlReader.Create(new StringReader(fixture.Output.ToString()), settings))
-            {
-                while (reader.Read())
-                {
-                }
-            }
-        }
     }
 }
