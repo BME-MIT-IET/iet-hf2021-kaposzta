@@ -19,22 +19,22 @@ namespace bdd_testing.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.8.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Using dotNetRDF to create \"Hello World application\"", SourceFile="Features\\RDFwriting.feature", SourceLine=0)]
-    public partial class UsingDotNetRDFToCreateHelloWorldApplicationFeature
+    [TechTalk.SpecRun.FeatureAttribute("RDFSelectingNodes", Description="\tWhen we have a huge Graph we want to choose only the nodes we need", SourceFile="Features\\RDFSelectingNodes.feature", SourceLine=0)]
+    public partial class RDFSelectingNodesFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "RDFwriting.feature"
+#line 1 "RDFSelectingNodes.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Using dotNetRDF to create \"Hello World application\"", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RDFSelectingNodes", "\tWhen we have a huge Graph we want to choose only the nodes we need", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,14 +70,14 @@ namespace bdd_testing.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Writing RDF graph to file", SourceLine=2)]
-        public virtual void WritingRDFGraphToFile()
+        [TechTalk.SpecRun.ScenarioAttribute("Geting one of the nodes of our RDF graph", SourceLine=3)]
+        public virtual void GetingOneOfTheNodesOfOurRDFGraph()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Writing RDF graph to file", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 3
-this.ScenarioInitialize(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Geting one of the nodes of our RDF graph", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 4
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -96,17 +96,14 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
-testRunner.Given("Graph g is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
 #line 5
-testRunner.When("User add \"Hello World\" string to the graph", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+  testRunner.Given("graph g is loaded", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
-testRunner.And("Graph g is saved to \"hello_world.rdf\" file", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+  testRunner.When("node \"bdd_cool\" is picked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
-testRunner.Then("\"hello_world.rdf\" file should be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+  testRunner.Then("triples of \"bdd_cool\" nodes shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

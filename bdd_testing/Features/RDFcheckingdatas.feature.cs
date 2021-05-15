@@ -19,7 +19,7 @@ namespace bdd_testing.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.8.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("RDFcheckingdatas", Description="\tWe want to see what datas o", SourceFile="Features\\RDFcheckingdatas.feature", SourceLine=0)]
+    [TechTalk.SpecRun.FeatureAttribute("RDFcheckingdatas", Description="\tWe want to see  datas of our graph", SourceFile="Features\\RDFcheckingdatas.feature", SourceLine=0)]
     public partial class RDFcheckingdatasFeature
     {
         
@@ -34,7 +34,7 @@ namespace bdd_testing.Features
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RDFcheckingdatas", "\tWe want to see what datas o", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "RDFcheckingdatas", "\tWe want to see  datas of our graph", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("writing datas of graph g", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.Then("triples related to graph g are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("triples of g are shown", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

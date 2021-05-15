@@ -30,15 +30,17 @@ namespace bdd_testing.Steps
             }
         }
 
-        [Then(@"triples related to graph g are shown")]
-        public void ThenTriplesRelatedToGraphGAreShown()
+        [Then(@"triples of g are shown")]
+        public void ThenTriplesOfGAreShown()
         {
+
             NTriplesWriter nTriplesWriter = new NTriplesWriter(NTriplesSyntax.Original);
             String data = VDS.RDF.Writing.StringWriter.Write(g, nTriplesWriter);
-           data.Should()
-                .StartWith("<http://www.dotnetrdf.org/>")
-                .And.Contain("Hello World")
-                .And.Contain("<http://example.org/says>");
+            data.Should()
+                 .StartWith("<http://www.dotnetrdf.org/>")
+                 .And.Contain("Hello World")
+                 .And.Contain("<http://example.org/says>");
         }
+
     }
 } 

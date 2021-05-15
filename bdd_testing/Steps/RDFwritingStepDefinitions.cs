@@ -30,11 +30,6 @@ namespace bdd_testing.Steps
             g.Assert(new Triple(dotNetRDF, says, helloWorld));
         }
 
-        [When(@"graph ""(.*)"" is saved to then console")]
-        public void WhenGraphIsSavedToThenConsole()
-        {
-            
-        }
         [When(@"Graph g is saved to ""(.*)"" file")]
         public void WhenGraphGIsSavedToFile(string p0)
         {
